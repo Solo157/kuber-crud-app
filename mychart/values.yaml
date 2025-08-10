@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: kuber-crud-app
+  tag: latest
+  pullPolicy: Never
+
+service:
+  port: 80
+  targetPort: 8000
+  type: ClusterIP
+
+app:
+  containerPort: 8000
+  healthPath: /user/health
+
+ingress:
+  enabled: true
+  className: nginx
+  host: arch.homework
+  path: /
+
+config:
+  DB_URL: production
+
+database:
+  secretName: kuber-crud-app-secret
